@@ -15,14 +15,16 @@ class PlayCommand extends commando.Command {
     }
 
    run(message, args) {
-       message.reply(`Feature is WIP`);
-       if(true)
-       {
-        const channelConnection = message.guild.voiceConnection;
-        channelConnection.playFile("C:/Users/daybo/Desktop/ovelords_bot_2.0/commands/music/Music/samir.mp3")
-        message.reply("playing music right now.")
-        
-        }       
+ const voiceChannel = message.member.voiceChannel;
+ let data = message.content.split(" ");
+    console.log(data[1])
+    if (!voiceChannel) return message.reply(`Please be in a voice channel first!`);
+    voiceChannel.join()
+      .then(connnection => {
+        const stream = ytdl(data[1], { filter: 'audioonly' });
+        const dispatcher = connnection.playStream(stream);
+        dispatcher.on('end', () => voiceChannel.leave());
+      }); 
     }
 }
 

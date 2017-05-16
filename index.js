@@ -1,7 +1,8 @@
 
 const commando = require('discord.js-commando');
 const bot = new commando.Client({
-    prefix: "-"
+    commandPrefix: '-',
+    owner: '137920111754346496'
 });
 const sqlite = require('sqlite');
 const fs = require('fs');
@@ -9,6 +10,7 @@ const ytdl = require('ytdl-core');
 const opus = require('node-opus');
 const bank = require("./money.json");
 const config = require("./config.json")
+const path = require('path');
 
 
 bot.setProvider(
